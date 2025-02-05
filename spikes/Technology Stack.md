@@ -1,4 +1,4 @@
-# Spike Document: Technology Stack for Interface
+# Spike : Technology Stack for Interface
 
 ## Objective
 
