@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import "@styles";
-import "@radix-ui/themes/styles.css";
-import { Theme } from "@radix-ui/themes";
 
 const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
@@ -21,13 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Theme>
-        <body
-          className={`${notoSans.variable} ${notoSans.variable} antialiased`}
-        >
-          {children}
-        </body>
-      </Theme>
+      <body className={`${notoSans.variable} ${notoSans.variable} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
