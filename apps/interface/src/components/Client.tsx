@@ -4,18 +4,18 @@ import { trpc } from "@/server/api/client";
 
 export const Client = () => {
     const bank = trpc.bank.get.useQuery({ name: 'td' });
-
-    if (bank.error) {
-        return <div>{bank.error.message}</div>;
-    }
+    console.log({ bank });
 
     if (bank.isLoading) {
         return <div>Loading...</div>;
     }
+    if (!bank.data) {
+        return <div>No Data</div>;
+    }
 
     return (
         <p>
-            {bank.data?.url}
+            Client: {bank.data.url}
         </p>
     );
 }
