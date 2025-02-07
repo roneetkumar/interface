@@ -2,8 +2,8 @@ import { Client } from "@/components/Client";
 import { HydrateClient, trpc } from "@/server/api/server";
 
 export default async function Home() {
-  const bank = await trpc.bank.get({ name: 'scotia' });
-  void await trpc.broker.get.prefetch();
+  const bank = await trpc.bank.get({ name: "scotia" });
+  void (await trpc.broker.get.prefetch());
 
   return (
     <div className="flex items-center flex-col min-h-screen max-w-[600px] m-auto">
@@ -14,6 +14,6 @@ export default async function Home() {
           <Client />
         </HydrateClient>
       </div>
-    </div >
+    </div>
   );
 }
