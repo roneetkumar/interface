@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import "@styles";
+import { TRPCProvider } from "@/server/api/client";
 
 const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
@@ -18,10 +19,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${notoSans.variable} ${notoSans.variable} antialiased`}>
-        {children}
-      </body>
-    </html>
+    <TRPCProvider>
+      <html lang="en">
+        <body className={`${notoSans.variable} ${notoSans.variable} antialiased`}>
+          {children}
+        </body>
+      </html>
+    </TRPCProvider>
   );
 }

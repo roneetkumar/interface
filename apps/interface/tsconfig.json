@@ -28,7 +28,7 @@
         "./src/*"
       ],
       "@styles": [
-        "./src/app/styles/globals.css"
+        "./src/styles/globals.css"
       ]
     }
   },
