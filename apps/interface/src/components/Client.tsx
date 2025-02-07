@@ -1,47 +1,27 @@
 "use client";
 
-import { trpc } from "@/server/api/client";
-import { useState } from "react";
-import { usePlaidLink } from "react-plaid-link";
+import { useGetBankAccounts } from "@/hooks/queries/bank";
+import { PlaidLinkButton } from "./PlaidLinkButton";
+import { usePlaidAccessToken } from "@/hooks/custom-hooks/usePlaidAccessToken";
 
 export const Client = ({ token }: { token: string }) => {
-  const [accessToken, setAccessToken] = useState<string>();
+  const { accessToken, onSuccess } = usePlaidAccessToken();
 
-  const exchangeTokenMutation = trpc.plaid.createExchangeToken.useMutation();
-
-  const bankAccounts = trpc.bank.getAccounts.useQuery(
-    { accessToken: accessToken! },
-    { enabled: !!accessToken },
-  );
-
-  const onSuccess = async (public_token: string) => {
-    try {
-      const data = await exchangeTokenMutation.mutateAsync({
-        publicToken: public_token,
-      });
-
-      setAccessToken(data.accessToken);
-    } catch (error) {
-      console.error("Error exchanging public token:", error);
-    }
-  };
-
-  const { open, ready } = usePlaidLink({
-    token: token!,
-    onSuccess,
-  });
-
-  console.log(JSON.stringify(bankAccounts.data, null, 2));
+  const bankAccounts = useGetBankAccounts(accessToken);
 
   return (
     <div className="flex flex-col min-h-screen max-w-[600px] m-auto">
-      <h1>Users</h1>
-
       {token && (
-        <button onClick={() => open()} disabled={!ready}>
-          Connect Bank
-        </button>
+        <PlaidLinkButton onSuccess={onSuccess} token={token}>
+          Connect Plaid
+        </PlaidLinkButton>
       )}
+
+      <br />
+      <hr />
+      <br />
+      <h1>bank data :</h1>
+      <pre>{JSON.stringify(bankAccounts, null, 2)}</pre>
     </div>
   );
 };
