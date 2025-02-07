@@ -21,7 +21,9 @@ export default function RootLayout({
   return (
     <TRPCProvider>
       <html lang="en">
-        <body className={`${notoSans.variable} ${notoSans.variable} antialiased`}>
+        <body
+          className={`${notoSans.variable} ${notoSans.variable} antialiased`}
+        >
           {children}
         </body>
       </html>
