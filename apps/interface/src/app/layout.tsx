@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import "@styles";
 
-
-
 const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
   subsets: ["latin"],
@@ -21,9 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${notoSans.variable} ${notoSans.variable} antialiased`}
-      >
+      <body className={`${notoSans.variable} ${notoSans.variable} antialiased`}>
         {children}
       </body>
     </html>
