@@ -27,6 +27,9 @@
       "@/*": [
         "./src/*"
       ],
+      "@drizzle": [
+        "./drizzle",
+      ],
       "@styles": [
         "./src/styles/globals.css"
       ]

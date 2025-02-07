@@ -3,19 +3,24 @@
 import { trpc } from "@/server/api/client";
 
 export const Client = () => {
-    const bank = trpc.bank.get.useQuery({ name: 'td' });
-    console.log({ bank });
+    const broker = trpc.broker.get.useQuery();
 
-    if (bank.isLoading) {
-        return <div>Loading...</div>;
+    if (broker.isLoading) {
+        return <div>Broker Loading...</div>;
     }
-    if (!bank.data) {
-        return <div>No Data</div>;
+
+    if (!broker.data) {
+        return <div>Broker No Data</div>;
     }
 
     return (
-        <p>
-            Client: {bank.data.url}
-        </p>
+        <div className="flex flex-col min-h-screen max-w-[600px] m-auto">
+            <h1>Users</h1>
+            <ul>
+                {broker.data?.map((user) => (
+                    <li key={user.id}>{user.name}</li>
+                ))}
+            </ul>
+        </div>
     );
 }
