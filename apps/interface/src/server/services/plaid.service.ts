@@ -1,4 +1,4 @@
-import { plaidClient } from "../plaid";
+import { plaidClient } from "@/server/plaid";
 
 export const createExchangeToken = async (publicToken: string) => {
   const response = await plaidClient.itemPublicTokenExchange({

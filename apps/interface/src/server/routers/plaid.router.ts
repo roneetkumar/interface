@@ -1,4 +1,4 @@
-import { createTRPCRouter, publicProcedure } from "../../api/trpc";
+import { createTRPCRouter, publicProcedure } from "../api/trpc";
 import { z } from "zod";
 
 import { Products, CountryCode } from "plaid";

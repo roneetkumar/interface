@@ -1,11 +1,10 @@
-import { createTRPCRouter, publicProcedure } from "../../api/trpc";
+import { createTRPCRouter, publicProcedure } from "../api/trpc";
 import { z } from "zod";
-import { plaidClient } from "../plaid";
 import { TRPCError } from "@trpc/server";
-import { createExchangeToken } from "../plaid/plaid.service";
-import { db } from "@/db/db";
+import { db } from "@/server/db";
 import { users } from "drizzle/schema";
 import { eq } from "drizzle-orm";
+import { createExchangeToken } from "../services/plaid.service";
 
 const USER_ID = 1;
 export const userRouter = createTRPCRouter({
