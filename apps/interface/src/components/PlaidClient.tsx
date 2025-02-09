@@ -2,29 +2,38 @@
 
 import { useGetBankAccounts } from "@/hooks/queries/bank.client";
 import { PlaidLinkButton } from "./PlaidLinkButton";
-import { usePlaidAccessToken } from "@/contexts/PlaidAccessTokenContext";
+import { useUpdateAccessToken, useGetUser } from "@/hooks/queries/user.client";
 
-export const PlaidClient = ({ token }: { token: string }) => {
-  const { accessToken, accessTokenGetter } = usePlaidAccessToken();
+type PlaidClientProps = {
+  token: string;
+};
 
-  const bankAccounts = useGetBankAccounts(accessToken);
+export const PlaidClient = ({ token }: PlaidClientProps) => {
+  const { accessTokenGetter } = useUpdateAccessToken();
+
+  const user = useGetUser();
+
+  const bankAccounts = useGetBankAccounts(user?.hasAccessToken);
 
   return (
     <div className="w-full">
-      <div className="flex gap-4 items-center">
-        <h3>Want to sync you back ?</h3>
-        {token && (
-          <PlaidLinkButton onSuccess={accessTokenGetter} token={token}>
-            Connect Plaid
-          </PlaidLinkButton>
-        )}
-      </div>
+      {!bankAccounts && (
+        <>
+          <div className="flex gap-4 items-center">
+            <h3>Want to sync you back ?</h3>
+            {token && (
+              <PlaidLinkButton onSuccess={accessTokenGetter} token={token}>
+                Connect Plaid
+              </PlaidLinkButton>
+            )}
+          </div>
 
-      <br />
+          <br />
+          <hr />
+          <br />
+        </>
+      )}
 
-      <hr />
-
-      <br />
       <h1>Your bank data : {!bankAccounts && "N/A"}</h1>
       {bankAccounts && (
         <pre className="border p-3 mt-2 rounded-md max-h-[400px] overflow-y-auto">
