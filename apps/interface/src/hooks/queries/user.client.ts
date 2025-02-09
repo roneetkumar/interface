@@ -11,6 +11,7 @@ export const useUpdateAccessToken = () => {
       {
         onSuccess: () => {
           trpcUtils.bank.getAccounts.invalidate();
+          trpcUtils.user.getUser.invalidate();
         },
       },
     );

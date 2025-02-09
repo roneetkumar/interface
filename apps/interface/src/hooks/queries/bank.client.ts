@@ -1,10 +1,11 @@
 import { trpc } from "@/server/api/client";
+import { useGetUser } from "./user.client";
 
-export const useGetBankAccounts = (
-  hasAccessToken: boolean | undefined = false,
-) => {
+export const useGetBankAccounts = () => {
+  const user = useGetUser();
+
   const accounts = trpc.bank.getAccounts.useQuery(undefined, {
-    enabled: hasAccessToken,
+    enabled: !!user?.hasAccessToken,
   });
 
   return accounts.data;
