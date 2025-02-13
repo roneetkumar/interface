@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import { Noto_Sans } from "next/font/google";
 import "@styles";
 import { TRPCProvider } from "@/server/api/client";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@clerk/nextjs";
 
 const notoSans = Noto_Sans({
   variable: "--font-noto-sans",
@@ -19,14 +27,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <TRPCProvider>
-      <html lang="en">
-        <body
-          className={`${notoSans.variable} ${notoSans.variable} antialiased`}
-        >
-          {children}
-        </body>
-      </html>
-    </TRPCProvider>
+    <ClerkProvider>
+      <TRPCProvider>
+        <html lang="en">
+          <body
+            className={`${notoSans.variable} ${notoSans.variable} antialiased`}
+          >
+            {children}
+          </body>
+        </html>
+      </TRPCProvider>
+    </ClerkProvider>
   );
 }
