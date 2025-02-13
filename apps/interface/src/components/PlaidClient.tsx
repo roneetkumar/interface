@@ -1,13 +1,14 @@
 "use client";
 
-import { useGetBankAccounts } from "@/hooks/queries/bank.client";
 import { PlaidLinkButton } from "./PlaidLinkButton";
-import { usePlaidAccessToken } from "@/contexts/PlaidAccessTokenContext";
+import { useUpdateAccessToken } from "@/hooks/queries/user.client";
 
-export const PlaidClient = ({ token }: { token: string }) => {
-  const { accessToken, accessTokenGetter } = usePlaidAccessToken();
+type PlaidClientProps = {
+  token: string;
+};
 
-  const bankAccounts = useGetBankAccounts(accessToken);
+export const PlaidClient = ({ token }: PlaidClientProps) => {
+  const { accessTokenGetter } = useUpdateAccessToken();
 
   return (
     <div className="w-full">
@@ -19,18 +20,6 @@ export const PlaidClient = ({ token }: { token: string }) => {
           </PlaidLinkButton>
         )}
       </div>
-
-      <br />
-
-      <hr />
-
-      <br />
-      <h1>Your bank data : {!bankAccounts && "N/A"}</h1>
-      {bankAccounts && (
-        <pre className="border p-3 mt-2 rounded-md max-h-[400px] overflow-y-auto">
-          {JSON.stringify(bankAccounts, null, 2)}
-        </pre>
-      )}
     </div>
   );
 };
