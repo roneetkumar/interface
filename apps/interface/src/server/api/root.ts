@@ -1,7 +1,7 @@
-import { bankRouter } from "../routers/bank.router";
-import { brokerRouter } from "../routers/broker.router";
-import { plaidRouter } from "../routers/plaid.router";
-import { userRouter } from "../routers/user.router";
+import { bankRouter } from "./routers/bank.router";
+import { brokerRouter } from "./routers/broker.router";
+import { plaidRouter } from "./routers/plaid.router";
+import { userRouter } from "./routers/user.router";
 import { createCallerFactory, createTRPCRouter } from "./trpc";
 
 export const appRouter = createTRPCRouter({

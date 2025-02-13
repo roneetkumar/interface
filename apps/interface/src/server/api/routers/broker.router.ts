@@ -1,6 +1,6 @@
 import { db } from "@/server/db";
-import { createTRPCRouter, publicProcedure } from "../api/trpc";
-import { users } from "drizzle/schema";
+import { createTRPCRouter, publicProcedure } from "../trpc";
+import { users } from "@/server/db/schema";
 
 export const brokerRouter = createTRPCRouter({
   get: publicProcedure.query(async () => {

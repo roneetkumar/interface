@@ -1,9 +1,9 @@
 import { USER_ID } from "@/server/contants";
 import { TRPCError } from "@trpc/server";
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "../api/trpc";
-import { plaidClient } from "../plaid";
-import { getPlaidAccessToken } from "../services/user.service";
+import { createTRPCRouter, publicProcedure } from "../trpc";
+import { plaidClient } from "../../plaid";
+import { getPlaidAccessToken } from "../../services/user.service";
 
 export const bankRouter = createTRPCRouter({
   get: publicProcedure

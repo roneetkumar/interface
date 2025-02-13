@@ -1,6 +1,6 @@
 import { db } from "@/server/db";
 import { eq } from "drizzle-orm";
-import { users } from "drizzle/schema";
+import { users } from "../db/schema";
 
 export const getPlaidAccessToken = async (userId: number) => {
   const dbResponse = await db

@@ -1,9 +1,9 @@
-import { createTRPCRouter, publicProcedure } from "../api/trpc";
+import { createTRPCRouter, publicProcedure } from "../trpc";
 import { z } from "zod";
 
 import { Products, CountryCode } from "plaid";
 import { TRPCError } from "@trpc/server";
-import { plaidClient } from "../plaid";
+import { plaidClient } from "../../plaid";
 
 export const plaidRouter = createTRPCRouter({
   createLinkToken: publicProcedure
